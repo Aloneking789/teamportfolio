@@ -491,6 +491,37 @@
       color: var(--ink-soft);
     }
 
+    .cred-value {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      min-width: 0;
+      flex-wrap: wrap;
+    }
+
+    .copy-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink-soft);
+      border-radius: 999px;
+      padding: 0.12rem 0.5rem;
+      font-family: "Fira Code", monospace;
+      font-size: 0.62rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      border-color: rgba(192, 82, 42, 0.5);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .copy-btn.copied {
+      border-color: rgba(21, 115, 71, 0.5);
+      color: var(--ok);
+    }
+
     .ready-list {
       border: 1px solid var(--line);
       border-radius: 10px;
@@ -1010,6 +1041,58 @@
       <a class="btn" href="#top">Back to Top</a>
     </footer>
   </div>
+
+  <script>
+    (function () {
+      const rows = document.querySelectorAll('.cred-row');
+
+      rows.forEach((row) => {
+        const label = row.querySelector('span:first-child');
+        const value = row.querySelector('span:nth-child(2)');
+
+        if (!label || !value) {
+          return;
+        }
+
+        const field = label.textContent.trim().toLowerCase();
+        if (field !== 'email' && field !== 'password') {
+          return;
+        }
+
+        const wrapper = document.createElement('span');
+        wrapper.className = 'cred-value';
+
+        const valueText = document.createElement('span');
+        valueText.textContent = value.textContent;
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'copy-btn';
+        btn.textContent = 'Copy';
+        btn.setAttribute('aria-label', `Copy ${field}`);
+
+        btn.addEventListener('click', async () => {
+          const original = btn.textContent;
+          try {
+            await navigator.clipboard.writeText(valueText.textContent.trim());
+            btn.textContent = 'Copied';
+            btn.classList.add('copied');
+          } catch (error) {
+            btn.textContent = 'Failed';
+          }
+
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.classList.remove('copied');
+          }, 1200);
+        });
+
+        wrapper.appendChild(valueText);
+        wrapper.appendChild(btn);
+        value.replaceWith(wrapper);
+      });
+    }());
+  </script>
 </body>
 
 </html>
