@@ -323,6 +323,51 @@
       text-transform: uppercase;
     }
 
+    .member-actions {
+      margin-top: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+
+    .resume-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.24rem 0.56rem;
+      text-decoration: none;
+      font-family: "Fira Code", monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.07em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.7);
+      transition: 0.2s ease;
+    }
+
+    .resume-btn:hover {
+      border-color: rgba(192, 82, 42, 0.5);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .resume-missing {
+      display: inline-flex;
+      align-items: center;
+      border: 1px dashed var(--line);
+      border-radius: 999px;
+      padding: 0.24rem 0.56rem;
+      font-family: "Fira Code", monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.07em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
+
     .category {
       margin-top: 2rem;
     }
@@ -621,6 +666,9 @@
               <div class="member-num">01</div>
               <h3>Vishnu Dubey</h3>
               <span class="role">Frontend Dev</span>
+              <div class="member-actions">
+                <a class="resume-btn" href="assets/Vishnu_Resume_Jan%20(1).pdf" target="_blank">View Resume</a>
+              </div>
             </div>
           </article>
 
@@ -632,6 +680,9 @@
               <div class="member-num">02</div>
               <h3>Abhay Pandey</h3>
               <span class="role">Full Stack Dev</span>
+              <div class="member-actions">
+                <a class="resume-btn" href="assets/Abhay_Resume_SDE.pdf" target="_blank">View Resume</a>
+              </div>
             </div>
           </article>
 
@@ -643,6 +694,9 @@
               <div class="member-num">03</div>
               <h3>Abhijeet Gupta</h3>
               <span class="role">Backend Dev</span>
+              <div class="member-actions">
+                <a class="resume-btn" href="assets/Abhijeet_Resume.pdf" target="_blank">View Resume</a>
+              </div>
             </div>
           </article>
 
@@ -654,6 +708,9 @@
               <div class="member-num">04</div>
               <h3>Aadarsh Chauhaan</h3>
               <span class="role">Full Stack Dev</span>
+              <div class="member-actions">
+                <span class="resume-missing">Resume pending</span>
+              </div>
             </div>
           </article>
 
@@ -665,6 +722,9 @@
               <div class="member-num">05</div>
               <h3>Prashant Patel</h3>
               <span class="role">Backend and DevOps</span>
+              <div class="member-actions">
+                <a class="resume-btn" href="assets/Prashant_Resume.pdf" target="_blank">View Resume</a>
+              </div>
             </div>
           </article>
         </div>
@@ -714,7 +774,7 @@
           </div>
           <div class="project-grid">
             <article class="project-card">
-              <img class="project-cover" src="https://placehold.co/1200x675/e7ddd0/4d3e2f?text=RoadEye+Products"
+              <img class="project-cover" src="assets/Roadeyeproduct.jpeg"
                 alt="RoadEye products preview">
               <div class="project-body">
                 <h4 class="project-title">RoadEye Products</h4>
@@ -751,7 +811,7 @@
             </article>
 
             <article class="project-card">
-              <img class="project-cover" src="https://placehold.co/1200x675/e6d8cb/4f3d2d?text=Tracker+App"
+              <img class="project-cover" src="assets/rtracker.png"
                 alt="Tracker app preview">
               <div class="project-body">
                 <h4 class="project-title">Tracker App</h4>
@@ -768,7 +828,7 @@
             </article>
 
             <article class="project-card">
-              <img class="project-cover" src="https://placehold.co/1200x675/e4d4c6/4c3a2a?text=KoiSwipe+Client+App"
+              <img class="project-cover" src="assets/koiswipe.png"
                 alt="KoiSwipe app preview">
               <div class="project-body">
                 <h4 class="project-title">KoiSwipe</h4>
@@ -780,7 +840,7 @@
             </article>
 
             <article class="project-card">
-              <img class="project-cover" src="https://placehold.co/1200x675/e9dccf/553f2e?text=Client+Projects"
+              <img class="project-cover" src="assets/toc.png"
                 alt="Client app projects preview">
               <div class="project-body">
                 <h4 class="project-title">The Origin Chapter and Gloocare</h4>
@@ -794,7 +854,7 @@
             </article>
 
             <article class="project-card">
-              <img class="project-cover" src="https://placehold.co/1200x675/ebdfd2/5b4331?text=Blockchain+Final+Round"
+              <img class="project-cover" src="assets/blockchanin.jpeg"
                 alt="Hackathon blockchain project preview">
               <div class="project-body">
                 <h4 class="project-title">Hackathon Final Round Project</h4>
@@ -814,7 +874,7 @@
           </div>
           <div class="project-grid">
             <article class="project-card">
-              <img class="project-cover" src="https://placehold.co/1200x675/e8dbcf/4f3d2f?text=Sim+Inventory+Portal"
+              <img class="project-cover" src="assets/siminventory.jpeg"
                 alt="Sim inventory portal preview">
               <div class="project-body">
                 <h4 class="project-title">Sim Inventory</h4>
@@ -852,7 +912,7 @@
           </div>
           <div class="project-grid">
             <article class="project-card">
-              <img class="project-cover" src="https://placehold.co/1200x675/e9ddcf/4b3a2c?text=Mandi+Management+System"
+              <img class="project-cover" src="assets/mandireal.jpeg"
                 alt="Mandi management system preview">
               <div class="project-body">
                 <h4 class="project-title">Mandi Management System</h4>
@@ -868,7 +928,7 @@
             </article>
 
             <article class="project-card">
-              <img class="project-cover" src="https://placehold.co/1200x675/e7d9cc/4d3d2d?text=School+Management"
+              <img class="project-cover" src="assets/schoolmanagement.png"
                 alt="School management preview">
               <div class="project-body">
                 <h4 class="project-title">School Management</h4>
@@ -884,7 +944,7 @@
             </article>
 
             <article class="project-card">
-              <img class="project-cover" src="https://placehold.co/1200x675/eaded1/54402e?text=MLM+Software"
+              <img class="project-cover" src="assets/mlm.png"
                 alt="MLM software preview">
               <div class="project-body">
                 <h4 class="project-title">MLM Software</h4>
