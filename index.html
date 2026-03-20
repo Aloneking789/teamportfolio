@@ -501,8 +501,8 @@
 
     .copy-btn {
       border: 1px solid var(--line);
-      background: #fff;
-      color: var(--ink-soft);
+      background: var(--accent);
+      color: #fff;
       border-radius: 999px;
       padding: 0.12rem 0.5rem;
       font-family: "Fira Code", monospace;
@@ -512,9 +512,15 @@
     }
 
     .copy-btn:hover {
-      border-color: rgba(192, 82, 42, 0.5);
-      color: var(--accent);
+      border-color: var(--accent-soft);
+      background: var(--accent-soft);
+      color: #fff;
       transform: translateY(-1px);
+    }
+
+    .copy-btn:focus-visible {
+      outline: 2px solid rgba(192, 82, 42, 0.35);
+      outline-offset: 2px;
     }
 
     .copy-btn.copied {
@@ -1044,7 +1050,31 @@
 
   <script>
     (function () {
+      const fallbackPreview = 'https://placehold.co/1280x720/e8dbcf/4f3d2f?text=Project+Preview';
+
+      document.querySelectorAll('.project-cover').forEach((img) => {
+        img.addEventListener('error', () => {
+          if (!img.dataset.fallbackApplied) {
+            img.dataset.fallbackApplied = 'true';
+            img.src = fallbackPreview;
+          }
+        });
+      });
+
       const rows = document.querySelectorAll('.cred-row');
+
+      const fallbackCopy = (text) => {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        temp.setAttribute('readonly', '');
+        temp.style.position = 'absolute';
+        temp.style.left = '-9999px';
+        document.body.appendChild(temp);
+        temp.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(temp);
+        return ok;
+      };
 
       rows.forEach((row) => {
         const label = row.querySelector('span:first-child');
@@ -1068,16 +1098,29 @@
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'copy-btn';
-        btn.textContent = 'Copy';
+        btn.textContent = `Copy ${field}`;
         btn.setAttribute('aria-label', `Copy ${field}`);
 
         btn.addEventListener('click', async () => {
           const original = btn.textContent;
+          const copyText = valueText.textContent.trim();
+          let copied = false;
+
           try {
-            await navigator.clipboard.writeText(valueText.textContent.trim());
+            if (navigator.clipboard && window.isSecureContext) {
+              await navigator.clipboard.writeText(copyText);
+              copied = true;
+            } else {
+              copied = fallbackCopy(copyText);
+            }
+          } catch (error) {
+            copied = fallbackCopy(copyText);
+          }
+
+          if (copied) {
             btn.textContent = 'Copied';
             btn.classList.add('copied');
-          } catch (error) {
+          } else {
             btn.textContent = 'Failed';
           }
 
