@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Portfolio | RoadEye Engineering Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f0e8;
+      --bg-soft: #ede6da;
+      --ink: #1c1814;
+      --ink-soft: #665f56;
+      --accent: #c0522a;
+      --accent-soft: #e07048;
+      --line: rgba(28, 24, 20, 0.12);
+      --card: #fcf8f2;
+      --shadow: 0 10px 30px rgba(28, 24, 20, 0.09);
+      --ok: #157347;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Outfit", sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(224, 112, 72, 0.15), transparent 35%),
+        radial-gradient(circle at 88% 2%, rgba(192, 82, 42, 0.1), transparent 30%),
+        linear-gradient(180deg, #fffaf1 0%, var(--bg) 100%);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    .container {
+      width: min(1220px, 100%);
+      padding-inline: clamp(1rem, 4vw, 3rem);
+      margin: 0 auto;
+    }
+
+    .rule {
+      border: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-family: "Fira Code", monospace;
+      font-size: 0.67rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.85rem, 4.6vw, 3.2rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      color: var(--ink-soft);
+      max-width: 820px;
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      place-items: center;
+      padding: 5.8rem 0 4.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
+    .hero::before {
+      width: 520px;
+      height: 520px;
+      top: -220px;
+      right: -140px;
+      background: radial-gradient(circle, rgba(224, 112, 72, 0.28) 0%, rgba(224, 112, 72, 0.06) 58%, transparent 100%);
+    }
+
+    .hero::after {
+      width: 420px;
+      height: 420px;
+      bottom: -180px;
+      left: -120px;
+      background: radial-gradient(circle, rgba(192, 82, 42, 0.22) 0%, rgba(192, 82, 42, 0.04) 55%, transparent 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1.3rem;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 7.5vw, 5.2rem);
+      line-height: 0.93;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-copy h1 em {
+      display: block;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .hero-copy p {
+      max-width: 700px;
+      color: var(--ink-soft);
+      font-size: 1rem;
+    }
+
+    .hero-team-preview {
+      margin-top: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 6px 16px rgba(28, 24, 20, 0.16);
+      background: #ddd;
+    }
+
+    .hero-team-tag {
+      font-family: "Fira Code", monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.25rem 0.6rem;
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.6rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 1.5px solid var(--line);
+      color: var(--ink);
+      padding: 0.7rem 1.1rem;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(5px);
+      transition: 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-fill {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-fill:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent-soft);
+      color: #fff;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .metric {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.85rem;
+      box-shadow: var(--shadow);
+    }
+
+    .metric .m-top {
+      font-family: "Fira Code", monospace;
+      font-size: 0.65rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .metric .m-value {
+      font-size: 1.28rem;
+      font-weight: 700;
+      margin-top: 0.15rem;
+      color: var(--accent);
+    }
+
+    section {
+      padding: 4.8rem 0;
+    }
+
+    .stack-wrap {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .stack-chip {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 0.3rem 0.68rem;
+      font-family: "Fira Code", monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
+    }
+
+    .team-grid {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .member {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .member:hover {
+      transform: translateY(-6px);
+      border-color: rgba(192, 82, 42, 0.5);
+    }
+
+    .member-photo {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      background: #ddd;
+    }
+
+    .member-body {
+      padding: 0.78rem;
+    }
+
+    .member-num {
+      font-family: "Fira Code", monospace;
+      color: var(--accent);
+      font-size: 0.67rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+
+    .member h3 {
+      font-size: 0.98rem;
+      line-height: 1.25;
+      margin-bottom: 0.35rem;
+    }
+
+    .role {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.2rem 0.56rem;
+      font-family: "Fira Code", monospace;
+      font-size: 0.61rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+    }
+
+    .category {
+      margin-top: 2rem;
+    }
+
+    .cat-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.8rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.65rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .cat-head h3 {
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .cat-tag {
+      font-family: "Fira Code", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .project-cover {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      background: #ded6cb;
+    }
+
+    .project-body {
+      padding: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      height: 100%;
+    }
+
+    .project-title {
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+
+    .project-desc {
+      color: var(--ink-soft);
+      font-size: 0.88rem;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 0.42rem;
+    }
+
+    .link-row {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.48rem 0.56rem;
+      font-size: 0.8rem;
+      background: #fff;
+      word-break: break-all;
+      transition: 0.2s ease;
+    }
+
+    .link-row:hover {
+      transform: translateX(3px);
+      border-color: rgba(192, 82, 42, 0.5);
+      color: var(--accent);
+    }
+
+    .creds {
+      border: 1px dashed rgba(28, 24, 20, 0.25);
+      border-radius: 10px;
+      padding: 0.62rem;
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .creds h4 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
+      margin-bottom: 0.28rem;
+    }
+
+    .cred-row {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 0.4rem;
+      font-family: "Fira Code", monospace;
+      font-size: 0.72rem;
+      line-height: 1.5;
+    }
+
+    .cred-row span:first-child {
+      color: var(--ink-soft);
+    }
+
+    .ready-list {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.56rem;
+      background: rgba(255, 255, 255, 0.6);
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      display: grid;
+      gap: 0.24rem;
+    }
+
+    .note {
+      margin-top: 1.2rem;
+      border: 1px solid rgba(21, 115, 71, 0.3);
+      background: rgba(21, 115, 71, 0.06);
+      color: var(--ok);
+      border-radius: 10px;
+      padding: 0.72rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 1.2rem 0 2rem;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      display: flex;
+      gap: 0.8rem;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1120px) {
+      .container {
+        padding-inline: clamp(1rem, 3.5vw, 2rem);
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-metrics {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 920px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 5.2rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        padding-inline: 1rem;
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cred-row {
+        grid-template-columns: 82px 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .cat-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">RoadEye Team Showcase</div>
+        <h1>Meet The Team<em>Engineering ideas into products.</em></h1>
+        <p>
+          Full stack execution across app development, backend systems, DevOps, and business software.
+          This portfolio showcases team members, tech stack, and real project demos with credentials.
+        </p>
+        <div class="hero-team-preview">
+          <img class="hero-avatar"
+            src="assets/vishnu.jpg"
+            alt="Vishnu Dubey" loading="lazy"
+            onerror="this.src='https://placehold.co/88x88/e8dbcf/4f3d2f?text=VD'">
+          <img class="hero-avatar"
+            src="assets/abhay.jpg"
+            alt="Abhay Pandey" loading="lazy"
+            onerror="this.src='https://placehold.co/88x88/e8dbcf/4f3d2f?text=AP'">
+          <img class="hero-avatar"
+            src="assets/abhijeet.jpg"
+            alt="Abhijeet Gupta" loading="lazy"
+            onerror="this.src='https://placehold.co/88x88/e8dbcf/4f3d2f?text=AG'">
+          <img class="hero-avatar"
+            src="assets/aadarsh.jpg"
+            alt="Aadarsh Chauhaan" loading="lazy"
+            onerror="this.src='https://placehold.co/88x88/e8dbcf/4f3d2f?text=AC'">
+          <img class="hero-avatar"
+            src="assets/prashant.jpg"
+            alt="Prashant Patel" loading="lazy"
+            onerror="this.src='https://placehold.co/88x88/e8dbcf/4f3d2f?text=PP'">
+          <span class="hero-team-tag">5 Core Members</span>
+        </div>
+        <div class="hero-links">
+          <a class="btn btn-fill" href="#team">Meet Team</a>
+          <a class="btn" href="#projects">Project Showcase</a>
+          <a class="btn" href="#stack">Tech Stack</a>
+        </div>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="m-top">Core Team</div>
+          <div class="m-value">5 Engineers</div>
+        </div>
+        <div class="metric">
+          <div class="m-top">Product Families</div>
+          <div class="m-value">4 Categories</div>
+        </div>
+        <div class="metric">
+          <div class="m-top">Ready Portals</div>
+          <div class="m-value">6+ Deployments</div>
+        </div>
+        <div class="metric">
+          <div class="m-top">Domains</div>
+          <div class="m-value">Fleet, CRM, Edu, MLM</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <hr class="rule">
+
+  <main>
+    <section id="team">
+      <div class="container">
+        <div class="eyebrow">Team</div>
+        <h2 class="section-title">Core Engineering Team</h2>
+        <p class="section-sub">Frontend, backend, full stack and DevOps collaboration with production-first delivery.</p>
+
+        <div class="team-grid">
+          <article class="member">
+            <img class="member-photo"
+              src="assets/vishnu.jpg"
+              alt="Vishnu Dubey" referrerpolicy="no-referrer">
+            <div class="member-body">
+              <div class="member-num">01</div>
+              <h3>Vishnu Dubey</h3>
+              <span class="role">Frontend Dev</span>
+            </div>
+          </article>
+
+          <article class="member">
+            <img class="member-photo"
+              src="assets/abhay.jpg"
+              alt="Abhay Pandey" referrerpolicy="no-referrer">
+            <div class="member-body">
+              <div class="member-num">02</div>
+              <h3>Abhay Pandey</h3>
+              <span class="role">Full Stack Dev</span>
+            </div>
+          </article>
+
+          <article class="member">
+            <img class="member-photo"
+              src="assets/abhijeet.jpg"
+              alt="Abhijeet Gupta" referrerpolicy="no-referrer">
+            <div class="member-body">
+              <div class="member-num">03</div>
+              <h3>Abhijeet Gupta</h3>
+              <span class="role">Backend Dev</span>
+            </div>
+          </article>
+
+          <article class="member">
+            <img class="member-photo"
+              src="assets/aadarsh.jpg"
+              alt="Aadarsh Chauhaan" referrerpolicy="no-referrer">
+            <div class="member-body">
+              <div class="member-num">04</div>
+              <h3>Aadarsh Chauhaan</h3>
+              <span class="role">Full Stack Dev</span>
+            </div>
+          </article>
+
+          <article class="member">
+            <img class="member-photo"
+              src="assets/prashant.jpg"
+              alt="Prashant Patel" referrerpolicy="no-referrer">
+            <div class="member-body">
+              <div class="member-num">05</div>
+              <h3>Prashant Patel</h3>
+              <span class="role">Backend and DevOps</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <section id="stack">
+      <div class="container">
+        <div class="eyebrow">Tech Stack</div>
+        <h2 class="section-title">Technology We Use</h2>
+        <p class="section-sub">Team stack across app development, backend APIs, cloud deployment, and DevOps workflows.</p>
+        <div class="stack-wrap">
+          <span class="stack-chip">React.js</span>
+          <span class="stack-chip">React Native</span>
+          <span class="stack-chip">Node.js</span>
+          <span class="stack-chip">Express.js</span>
+          <span class="stack-chip">TypeScript</span>
+          <span class="stack-chip">JavaScript</span>
+          <span class="stack-chip">MongoDB</span>
+          <span class="stack-chip">PostgreSQL</span>
+          <span class="stack-chip">Firebase</span>
+          <span class="stack-chip">Prisma</span>
+          <span class="stack-chip">AWS</span>
+          <span class="stack-chip">GCP</span>
+          <span class="stack-chip">CI/CD</span>
+          <span class="stack-chip">Postman</span>
+          <span class="stack-chip">DevOps Pipelines</span>
+          <span class="stack-chip">REST APIs</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <section id="projects">
+      <div class="container">
+        <div class="eyebrow">Projects</div>
+        <h2 class="section-title">Portfolio Showcase</h2>
+        <p class="section-sub">Each project card includes image, links, and credentials to keep the layout uniform and easy to scan.</p>
+
+        <div class="category">
+          <div class="cat-head">
+            <h3>App Development Projects</h3>
+            <span class="cat-tag">Mobile and Product Apps</span>
+          </div>
+          <div class="project-grid">
+            <article class="project-card">
+              <img class="project-cover" src="https://placehold.co/1200x675/e7ddd0/4d3e2f?text=RoadEye+Products"
+                alt="RoadEye products preview">
+              <div class="project-body">
+                <h4 class="project-title">RoadEye Products</h4>
+                <p class="project-desc">RoadEye app ecosystem with user and driver products plus role-based portal access.</p>
+                <div class="link-list">
+                  <a class="link-row" target="_blank" href="https://play.google.com/store/search?q=roadeye&c=apps&pli=1">Google Play: RoadEye Search</a>
+                  <a class="link-row" target="_blank" href="https://sim.theroadeye.com/">SIM Portal: sim.theroadeye.com</a>
+                  <a class="link-row" target="_blank" href="https://venus.vahansaarthi.com/login">Venus Portal Login</a>
+                  <a class="link-row" target="_blank" href="https://pluto.vahansaarthi.com/login">Pluto Portal Login</a>
+                  <a class="link-row" target="_blank" href="https://vahansaarthi.com/login">VahanSaarthi Login</a>
+                </div>
+                <div class="creds">
+                  <h4>SIM Portal Admin</h4>
+                  <div class="cred-row"><span>Email</span><span>putin123@gmail.com</span></div>
+                  <div class="cred-row"><span>Password</span><span>12345</span></div>
+                  <div class="cred-row"><span>Role</span><span>Admin</span></div>
+                </div>
+                <div class="creds">
+                  <h4>Venus Portal</h4>
+                  <div class="cred-row"><span>Email</span><span>admin.venus@gmail.com</span></div>
+                  <div class="cred-row"><span>Password</span><span>123456</span></div>
+                </div>
+                <div class="creds">
+                  <h4>Pluto Portal</h4>
+                  <div class="cred-row"><span>Email</span><span>admin.pluto@gmail.com</span></div>
+                  <div class="cred-row"><span>Password</span><span>123456</span></div>
+                </div>
+                <div class="creds">
+                  <h4>VahanSaarthi</h4>
+                  <div class="cred-row"><span>Email</span><span>prashantzkumar10@gmail.com</span></div>
+                  <div class="cred-row"><span>Password</span><span>123456</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img class="project-cover" src="https://placehold.co/1200x675/e6d8cb/4f3d2d?text=Tracker+App"
+                alt="Tracker app preview">
+              <div class="project-body">
+                <h4 class="project-title">Tracker App</h4>
+                <p class="project-desc">RoadEye tracker app with shared access for demo and validation.</p>
+                <div class="link-list">
+                  <a class="link-row" target="_blank" href="https://play.google.com/store/apps/details?id=com.trackernew&pcampaignid=web_share">Google Play: com.trackernew</a>
+                </div>
+                <div class="creds">
+                  <h4>Tracker App Login</h4>
+                  <div class="cred-row"><span>Email</span><span>kariayash67@gmail.com</span></div>
+                  <div class="cred-row"><span>Password</span><span>Login@123</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img class="project-cover" src="https://placehold.co/1200x675/e4d4c6/4c3a2a?text=KoiSwipe+Client+App"
+                alt="KoiSwipe app preview">
+              <div class="project-body">
+                <h4 class="project-title">KoiSwipe</h4>
+                <p class="project-desc">Anime-interest based dating app developed for client delivery.</p>
+                <div class="link-list">
+                  <a class="link-row" target="_blank" href="https://play.google.com/store/apps/details?id=com.koiswipe&hl=en_IN">KoiSwipe on Google Play</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img class="project-cover" src="https://placehold.co/1200x675/e9dccf/553f2e?text=Client+Projects"
+                alt="Client app projects preview">
+              <div class="project-body">
+                <h4 class="project-title">The Origin Chapter and Gloocare</h4>
+                <p class="project-desc">Client projects including The Origin Chapter and Gloocare salon app stack.</p>
+                <div class="link-list">
+                  <a class="link-row" target="_blank" href="https://play.google.com/store/apps/details?id=app.gloocare_salon_app&hl=en_IN">The Origin Chapter (Client Link)</a>
+                  <a class="link-row" target="_blank" href="https://play.google.com/store/apps/details?id=app.gloocare_salon_app&hl=en_IN">Gloocare Salon App</a>
+                  <a class="link-row" target="_blank" href="https://play.google.com/store/apps/details?id=com.salonpartnerapp&hl=en_IN">Salon User App</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img class="project-cover" src="https://placehold.co/1200x675/ebdfd2/5b4331?text=Blockchain+Final+Round"
+                alt="Hackathon blockchain project preview">
+              <div class="project-body">
+                <h4 class="project-title">Hackathon Final Round Project</h4>
+                <p class="project-desc">Blockchain-based asset trading project for final round showcase.</p>
+                <div class="link-list">
+                  <a class="link-row" target="_blank" href="https://drive.google.com/drive/u/2/folders/16-P-_hvRxvzPouIGKa7x4yTfsKfQ7s57">Google Drive Project Folder</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="cat-head">
+            <h3>Inventory Management System</h3>
+            <span class="cat-tag">Sim Inventory</span>
+          </div>
+          <div class="project-grid">
+            <article class="project-card">
+              <img class="project-cover" src="https://placehold.co/1200x675/e8dbcf/4f3d2f?text=Sim+Inventory+Portal"
+                alt="Sim inventory portal preview">
+              <div class="project-body">
+                <h4 class="project-title">Sim Inventory</h4>
+                <p class="project-desc">Organization and superadmin inventory operations at sim.theroadeye.com.</p>
+                <div class="link-list">
+                  <a class="link-row" target="_blank" href="https://sim.theroadeye.com/">Sim Inventory Portal</a>
+                </div>
+                <div class="creds">
+                  <h4>SuperAdmin Login</h4>
+                  <div class="cred-row"><span>Email</span><span>shivan@theroadeye.com</span></div>
+                  <div class="cred-row"><span>Password</span><span>Roadeye@123</span></div>
+                </div>
+                <div class="creds">
+                  <h4>Organization Login</h4>
+                  <div class="cred-row"><span>Email</span><span>roadeyeorg@gmail.com</span></div>
+                  <div class="cred-row"><span>Password</span><span>123456</span></div>
+                </div>
+                <div class="ready-list">
+                  <div>1) State Backend Portal</div>
+                  <div>2) Sim Inventory Portal</div>
+                  <div>3) Roadeye Tracker App</div>
+                  <div>4) Roadeye App</div>
+                  <div>5) Roadeye Drivers App</div>
+                  <div>6) Roadeye Transmitter</div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="cat-head">
+            <h3>CRM Softwares</h3>
+            <span class="cat-tag">Business Management Suites</span>
+          </div>
+          <div class="project-grid">
+            <article class="project-card">
+              <img class="project-cover" src="https://placehold.co/1200x675/e9ddcf/4b3a2c?text=Mandi+Management+System"
+                alt="Mandi management system preview">
+              <div class="project-body">
+                <h4 class="project-title">Mandi Management System</h4>
+                <div class="link-list">
+                  <a class="link-row" target="_blank" href="https://mandi-demo.netlify.app/">mandi-demo.netlify.app</a>
+                </div>
+                <div class="creds">
+                  <h4>Demo Login</h4>
+                  <div class="cred-row"><span>Email</span><span>demo3000@gmail.com</span></div>
+                  <div class="cred-row"><span>Password</span><span>Admin@123</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img class="project-cover" src="https://placehold.co/1200x675/e7d9cc/4d3d2d?text=School+Management"
+                alt="School management preview">
+              <div class="project-body">
+                <h4 class="project-title">School Management</h4>
+                <div class="link-list">
+                  <a class="link-row" target="_blank" href="https://ompublicschool.vercel.app/">ompublicschool.vercel.app</a>
+                </div>
+                <div class="creds">
+                  <h4>Demo Login</h4>
+                  <div class="cred-row"><span>User</span><span>PRIN5439419</span></div>
+                  <div class="cred-row"><span>Password</span><span>Om@273212</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img class="project-cover" src="https://placehold.co/1200x675/eaded1/54402e?text=MLM+Software"
+                alt="MLM software preview">
+              <div class="project-body">
+                <h4 class="project-title">MLM Software</h4>
+                <div class="link-list">
+                  <a class="link-row" target="_blank" href="https://mlm-forked.vercel.app/admin-login">mlm-forked.vercel.app/admin-login</a>
+                </div>
+                <div class="creds">
+                  <h4>Admin Login</h4>
+                  <div class="cred-row"><span>Email</span><span>admin@mlm.com</span></div>
+                  <div class="cred-row"><span>Password</span><span>12345</span></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="note">
+          Demo credentials are listed for authorized showcase and internal testing only.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="container">
+    <footer>
+      <span>RoadEye Team Portfolio</span>
+      <span>Built by Team Engineering Unit</span>
+      <a class="btn" href="#top">Back to Top</a>
+    </footer>
+  </div>
+</body>
+
+</html>
